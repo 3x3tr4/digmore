@@ -1,0 +1,58 @@
+{% extends 'MinerBundle::miner-layout.html.twig' %}
+
+{% block miner_content -%}
+    <h1>Miner list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Ip</th>
+                <th>Port</th>
+                <th>Alert</th>
+                <th>Mac</th>
+                <th>Poollogin</th>
+                <th>Poolpass</th>
+                <th>Poolid</th>
+                <th>Islocal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for miner in miners %}
+            <tr>
+                <td><a href="{{ path('miner_show', { 'id': miner.id }) }}">{{ miner.id }}</a></td>
+                <td>{{ miner.name }}</td>
+                <td>{{ miner.ip }}</td>
+                <td>{{ miner.port }}</td>
+                <td>{{ miner.alert }}</td>
+                <td>{{ miner.mac }}</td>
+                <td>{{ miner.poolLogin }}</td>
+                <td>{{ miner.poolPass }}</td>
+                <td>{{ miner.poolId }}</td>
+                <td>{{ miner.isLocal }}</td>
+                <td>{{ miner.isNew }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('miner_show', { 'id': miner.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('miner_update', { 'id': miner.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('miner_create') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'DeviceBundle::device-layout.html.twig' %}
+
+{% block device_content -%}
+    <h1>Device list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Minerid</th>
+                <th>Name</th>
+                <th>Intensity</th>
+                <th>Gap</th>
+                <th>Wsize</th>
+                <th>Vectors</th>
+                <th>Tc</th>
+                <th>Shaders</th>
+                <th>Freqdevice</th>
+                <th>Freqmemory</th>
+                <th>Powertune</th>
+                <th>Tempcut</th>
+                <th>Tempmax</th>
+                <th>Tempmin</th>
+                <th>Fanmin</th>
+                <th>Fanmax</th>
+                <th>Threads</th>
+                <th>New</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('device_show', { 'id': entity.id }) }}">{{ entity.minerId }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.intensity }}</td>
+                <td>{{ entity.gap }}</td>
+                <td>{{ entity.wsize }}</td>
+                <td>{{ entity.vectors }}</td>
+                <td>{{ entity.tc }}</td>
+                <td>{{ entity.shaders }}</td>
+                <td>{{ entity.freqDevice }}</td>
+                <td>{{ entity.freqMemory }}</td>
+                <td>{{ entity.powertune }}</td>
+                <td>{{ entity.tempCut }}</td>
+                <td>{{ entity.tempMax }}</td>
+                <td>{{ entity.tempMin }}</td>
+                <td>{{ entity.fanMin }}</td>
+                <td>{{ entity.fanMax }}</td>
+                <td>{{ entity.threads }}</td>
+                <td>{{ entity.new }}</td>
+                <td>{{ entity.id }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('device_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('device_update', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('device_create') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

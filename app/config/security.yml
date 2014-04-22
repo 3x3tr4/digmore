@@ -1,0 +1,44 @@
+security:
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        login:
+            pattern:  ^/enter$
+            security: false
+
+        secured_area:
+            pattern:    ^/
+            #anonymous: ~
+            form_login:
+                login_path: /enter
+                check_path: /login_check
+                default_target_path: /home
+            logout:
+                path:   /exit
+                target: /
+            http_basic:
+                realm: "Secure Digmore Area"
+
+    access_control:
+        - { path: ^/enter, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+                    orso:  { password: orso, roles: [ 'ROLE_USER' ] }
+                    jurop:  { password: password, roles: [ 'ROLE_USER' ] }
+
+        #main:
+        #    entity: { class: Digmore\UserBundle\Entity\User, property: username }
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext

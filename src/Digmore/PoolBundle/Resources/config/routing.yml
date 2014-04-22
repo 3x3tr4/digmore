@@ -1,0 +1,8 @@
+pools:
+    path: /pools
+    defaults: { _controller: PoolBundle:Pool:index, _format: html }
+
+pool:
+    path: /pool/{id}
+    defaults: { _controller: PoolBundle:Pool:view }
+

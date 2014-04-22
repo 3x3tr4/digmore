@@ -1,0 +1,18 @@
+index:
+    path: /
+    defaults: { _controller: MainBundle:Default:index }
+
+login:
+    path: /enter
+    defaults: { _controller: MainBundle:Security:login }
+
+login_check:
+    pattern: /login_check
+
+logout:
+    path: /exit
+    defaults: { _controller: MainBundle:Security:login }
+
+home:
+    pattern: /home
+    defaults: { _controller: MainBundle:Default:home }

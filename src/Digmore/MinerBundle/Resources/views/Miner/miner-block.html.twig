@@ -1,0 +1,27 @@
+
+<div class="miner-block">
+    <h1>{{ "Miner " ~ miner.name }}</h1>
+    <table class="item-list">
+        <tr>
+            <td>{{ miner.name }}</td>
+            <td>{{ miner.ip }}</td>
+            <td>{{ miner.port }}</td>
+            <td>{{ miner.alert }}</td>
+            <td>{{ miner.mac }}</td>
+            <td>{{ miner.poolLogin }}</td>
+            <td>{{ miner.poolPass }}</td>
+            <td>{{ miner.poolId }}</td>
+            <td>{{ miner.isLocal }}</td>
+            <td>
+            <ul>
+                <li>
+                    <a href="{{ path('miner_show', { 'id': miner.id }) }}">show</a>
+                </li>
+                <li>
+                    <a href="{{ path('miner_update', { 'id': miner.id }) }}">edit</a>
+                </li>
+            </ul>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,6 @@
+{% extends "MinerBundle::miner-layout.html.twig" %}
+
+{% block miner_content %}
+    <h1>Miner {{ miner.name }} detail.</h1>
+    {{ include('MinerBundle:Miner:miner-block.html.twig', { 'miner': miner }) }}
+{% endblock %}

@@ -1,0 +1,8 @@
+ticker_home:
+    pattern:  /tickers
+    defaults: { _controller: TickerBundle:Default:index }
+
+ticker_view:
+    pattern:  /ticker/{pairName}
+    defaults: { _controller: TickerBundle:Default:view }
+    

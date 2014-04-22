@@ -1,0 +1,23 @@
+miners:
+    path: /miners
+    defaults: { _controller: MinerBundle:Miner:index }
+
+miner:
+    path: /miner/{id}
+    defaults: { _controller: MinerBundle:Miner:view }
+
+miner_create:
+    path: /miner/add
+    defaults: { _controller: MinerBundle:Miner:create }
+
+miner_show:
+    path: /miner/view/{id}
+    defaults: { _controller: MinerBundle:Miner:show }
+
+miner_update:
+    path: /miner/edit/{id}
+    defaults: { _controller: MinerBundle:Miner:update }
+
+miner_delete:
+    path: /miner/remove/{id}
+    defaults: { _controller: MinerBundle:Miner:delete }

@@ -1,0 +1,86 @@
+Digmore\TickerBundle\Entity\Ticker:
+    type: entity
+    table: ticker
+    indexes:
+        pair_id:
+            columns:
+                - pair_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        time:
+            type: date
+            nullable: false
+            comment: ''
+        high:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            comment: ''
+        low:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            comment: ''
+        avg:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            comment: ''
+        vol:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            comment: ''
+        volCur:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            comment: ''
+            column: vol_cur
+        last:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            comment: ''
+        buy:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            comment: ''
+        sell:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            comment: ''
+        boolParam:
+            type: boolean
+            nullable: true
+            comment: ''
+            column: bool_param
+    manyToOne:
+        pair:
+            targetEntity: CurrencyPair
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                pair_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

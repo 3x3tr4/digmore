@@ -1,0 +1,16 @@
+{% extends 'TickerBundle::ticker-layout.html.twig' %}
+
+{% block ticker_content %}
+    <pre>{#{ ticker_url }#}</pre>
+
+    {% if tickers is defined and tickers|length %}
+    <ul>
+    {%  for t in tickers %}
+        {% if t is defined and t|length %}
+        <li><pre>{{ t.pair }}
+        H: {{ t.high }}, L: {{ t.low }}, B: {{ t.buy }}, S: {{ t.sell }}</pre></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,7 @@
+parameters:
+#    ticker.example.class: Digmore\TickerBundle\Example
+
+services:
+#    ticker.example:
+#        class: %ticker.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

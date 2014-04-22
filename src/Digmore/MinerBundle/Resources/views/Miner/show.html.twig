@@ -1,0 +1,64 @@
+{% extends 'MinerBundle::miner-layout.html.twig' %}
+
+{% block miner_content -%}
+    <h1>Miner</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Ip</th>
+                <td>{{ entity.ip }}</td>
+            </tr>
+            <tr>
+                <th>Port</th>
+                <td>{{ entity.port }}</td>
+            </tr>
+            <tr>
+                <th>Alert</th>
+                <td>{{ entity.alert }}</td>
+            </tr>
+            <tr>
+                <th>Mac</th>
+                <td>{{ entity.mac }}</td>
+            </tr>
+            <tr>
+                <th>Poollogin</th>
+                <td>{{ entity.poolLogin }}</td>
+            </tr>
+            <tr>
+                <th>Poolpass</th>
+                <td>{{ entity.poolPass }}</td>
+            </tr>
+            <tr>
+                <th>Poolid</th>
+                <td>{{ entity.poolId }}</td>
+            </tr>
+            <tr>
+                <th>Islocal</th>
+                <td>{{ entity.isLocal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('miners') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('miner_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

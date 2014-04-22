@@ -1,0 +1,18 @@
+ticker:
+    resource: "@TickerBundle/Resources/config/routing.yml"
+    prefix:   /
+
+digmore_device:
+    resource: "@DeviceBundle/Resources/config/routing.yml"
+
+digmore_main:
+    resource: "@MainBundle/Resources/config/routing.yml"
+    
+digmore_miner:
+    resource: "@MinerBundle/Resources/config/routing.yml"
+    
+digmore_pool:
+    resource: "@PoolBundle/Resources/config/routing.yml"
+    
+digmore_ticker:
+    resource: "@TickerBundle/Resources/config/routing.yml"

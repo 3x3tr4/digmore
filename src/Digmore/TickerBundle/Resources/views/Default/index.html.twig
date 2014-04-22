@@ -1,0 +1,26 @@
+{% extends 'TickerBundle::ticker-layout.html.twig' %}
+
+{% block ticker_content %}
+
+    <table cellpadding="5" cellspacing="5" border="1">
+    <tr>
+        <td colspan="2"><h2>Ticker index</h2></td>
+    </tr>
+    <tr>
+        <td>
+            <img src="{{ asset('bundles/ticker/images/mon-1.png') }}" title="monitor 1" alt="mon-1.png" />
+        </td>
+        <td>
+            <img src="{{ asset('bundles/ticker/images/mon-2.png') }}" title="monitor 2" alt="mon-2.png" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="{{ asset('bundles/ticker/images/mon-3.png') }}" title="monitor 3" alt="mon-3.png" />
+        </td>
+        <td>
+            <img src="{{ asset('bundles/ticker/images/mon-4.png') }}" title="monitor 4" alt="mon-4.png" />
+        </td>
+    </tr>
+    </table>
+{% endblock %}

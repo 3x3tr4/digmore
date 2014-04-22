@@ -1,0 +1,105 @@
+<?php
+
+namespace Digmore\TickerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Ticker
+ *
+ * @ORM\Table(name="ticker", indexes={@ORM\Index(name="pair_id", columns={"pair_id"})})
+ * @ORM\Entity
+ */
+class Ticker
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time", type="date", nullable=false)
+     */
+    private $time;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="high", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $high;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="low", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $low;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="avg", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $avg;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="vol", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $vol;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="vol_cur", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $volCur;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="last", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $last;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="buy", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $buy;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="sell", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $sell;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="bool_param", type="boolean", nullable=true)
+     */
+    private $boolParam;
+
+    /**
+     * @var \Digmore\TickerBundle\Entity\CurrencyPair
+     *
+     * @ORM\ManyToOne(targetEntity="Digmore\TickerBundle\Entity\CurrencyPair")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pair_id", referencedColumnName="id")
+     * })
+     */
+    private $pair;
+
+
+}

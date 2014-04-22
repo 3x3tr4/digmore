@@ -1,0 +1,15 @@
+{% extends 'MinerBundle::miner-layout.html.twig' %}
+
+{% block miner_content -%}
+    <h1>Miner creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('miners') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
