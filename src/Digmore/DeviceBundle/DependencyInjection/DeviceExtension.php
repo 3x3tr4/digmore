@@ -5,6 +5,7 @@ namespace Digmore\DeviceBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
@@ -15,8 +16,8 @@ use Symfony\Component\DependencyInjection\Loader;
 class DeviceExtension extends Extension
 {
     /**
-     * {@inheritDoc}
-     */
+     * {@ inheritDoc }
+     *
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
@@ -24,5 +25,15 @@ class DeviceExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+    }*/
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.xml');
+    }
+
+    public function getAlias()
+    {
+        return 'device';
     }
 }

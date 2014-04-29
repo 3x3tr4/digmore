@@ -14,17 +14,18 @@ use Digmore\DeviceBundle\Form\DeviceType;
  * Device controller.
  *
  */
-class DeviceController extends Controller
-{
+class DeviceController extends Controller {
     /**
      * Lists all Device entities.
      *
      */
-    public function indexAction()
+    public function listAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('DeviceBundle:Device')->findAll();
+        $entities = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('DeviceBundle:Device')
+            ->findAll();
 
         return $this->render(
             'DeviceBundle:Device:index.html.twig',
@@ -35,13 +36,40 @@ class DeviceController extends Controller
     }
 
     /**
+     * Creates a form to create a Device entity.
+     *
+     * @param Device $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createAddForm(Device $entity)
+    {
+        $form = $this->createForm(
+            new DeviceType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('device_create'),
+                'method' => 'POST'
+            )
+        );
+
+        $form->add(
+            'submit',
+            'submit',
+            array('label' => 'Create')
+        );
+
+        return $form;
+    }
+
+    /**
      * Creates a new Device entity.
      *
      */
-    public function createAction(Request $request)
+    public function addAction(Request $request)
     {
         $entity = new Device();
-        $form = $this->createCreateForm($entity);
+        $form = $this->createAddForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -49,42 +77,28 @@ class DeviceController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('device_show', array('id' => $entity->getId())));
+            return $this->redirect(
+                $this->generateUrl(
+                    'device_read',
+                    array('id' => $entity->getId())
+                )
+            );
         }
 
         return $this->render(
             'DeviceBundle:Device:new.html.twig',
             array(
                 'entity' => $entity,
-                'form'   => $form->createView()
+                'form' => $form->createView()
             )
         );
-    }
-
-    /**
-    * Creates a form to create a Device entity.
-    *
-    * @param Device $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createCreateForm(Device $entity)
-    {
-        $form = $this->createForm(new DeviceType(), $entity, array(
-            'action' => $this->generateUrl('device_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
     }
 
     /**
      * Finds and displays a Device entity.
      *
      */
-    public function showAction($id)
+    public function viewAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -94,7 +108,7 @@ class DeviceController extends Controller
             throw $this->createNotFoundException('Unable to find Device entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createRemoveForm($id);
 
         return $this->render(
             'DeviceBundle:Device:show.html.twig',
@@ -128,7 +142,7 @@ class DeviceController extends Controller
      * Edits an existing Device entity.
      *
      */
-    public function updateAction(Request $request, $id)
+    public function editAction(Request $request, $id = false)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -138,7 +152,7 @@ class DeviceController extends Controller
             throw $this->createNotFoundException('Unable to find Device entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createRemoveForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
@@ -149,19 +163,45 @@ class DeviceController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+    }
+
+    /**
+     * Creates a form to delete a Device entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createRemoveForm($id = false)
+    {
+        return $this
+            ->createFormBuilder()
+            ->setAction(
+                $this->generateUrl(
+                    'device_delete',
+                    array('id' => $id)
+                )
+            )
+            ->setMethod('DELETE')
+            ->add(
+                'submit',
+                'submit',
+                array('label' => 'Delete')
+            )
+            ->getForm();
     }
 
     /**
      * Deletes a Device entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function removeAction(Request $request, $id = false)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createRemoveForm($id);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -177,22 +217,5 @@ class DeviceController extends Controller
         }
 
         return $this->redirect($this->generateUrl('device'));
-    }
-
-    /**
-     * Creates a form to delete a Device entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('device_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
     }
 }

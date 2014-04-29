@@ -27,16 +27,16 @@ security:
 
     access_control:
         - { path: ^/enter, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http }
+        - { path: ^/user, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
 
     providers:
         in_memory:
             memory:
                 users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    user2:  { password: userpass2, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-                    orso:  { password: orso, roles: [ 'ROLE_USER' ] }
-                    jurop:  { password: password, roles: [ 'ROLE_USER' ] }
-
         #main:
         #    entity: { class: Digmore\UserBundle\Entity\User, property: username }
 

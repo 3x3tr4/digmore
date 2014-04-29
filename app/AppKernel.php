@@ -14,15 +14,16 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Digmore\TickerBundle\TickerBundle(),
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+        	$bundles[] = new Digmore\DeviceBundle\DeviceBundle();
             $bundles[] = new Digmore\MainBundle\MainBundle();
             $bundles[] = new Digmore\MinerBundle\MinerBundle();
             $bundles[] = new Digmore\PoolBundle\PoolBundle();
-            $bundles[] = new Digmore\DeviceBundle\DeviceBundle();
+            $bundles[] = new Digmore\TickerBundle\TickerBundle();
+            $bundles[] = new Digmore\RemoteBundle\RemoteBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

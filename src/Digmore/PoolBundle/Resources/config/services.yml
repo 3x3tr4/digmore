@@ -1,0 +1,25 @@
+parameters:
+
+    my_pool_extension.class: Digmore\PoolBundle\DependencyInjection\PoolExtension
+    my_pool_extension.param1: param_value_xyz
+
+
+services:
+
+    twig.extension.digmore.pool:
+        class: Digmore\PoolBundle\Twig\Extension\PoolExtension
+        arguments:
+            - "@twig.loader"
+        tags:
+            - { name: twig.extension }
+        public: false
+
+    kernel.event_listener.digmore.pool:
+        class: Digmore\PoolBundle\EventListener\ControllerListener
+        arguments: ["@my_pool_extension"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    my_pool_extension:
+        class: "%my_pool_extension.class%"
+        arguments: ["@service_container"]

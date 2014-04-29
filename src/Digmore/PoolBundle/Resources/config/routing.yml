@@ -1,8 +1,20 @@
 pools:
-    path: /pools
-    defaults: { _controller: PoolBundle:Pool:index, _format: html }
+    pattern: /pools
+    defaults: { _controller: PoolBundle:Pool:list }
+    
+pool_create:
+    path: /pool/add
+    defaults: { _controller: PoolBundle:Pool:add }
 
-pool:
+pool_read:
     path: /pool/{id}
     defaults: { _controller: PoolBundle:Pool:view }
 
+pool_update:
+    path: /pool/{id}/edit
+    defaults: { _controller: PoolBundle:Pool:edit }
+
+pool_delete:
+    path: /pool/{id}/remove
+    defaults: { _controller: PoolBundle:Pool:remove }
+    

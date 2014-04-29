@@ -1,7 +1,25 @@
 parameters:
-#    ticker.example.class: Digmore\TickerBundle\Example
+
+    my_ticker_extension.class: Digmore\TickerBundle\DependencyInjection\TickerExtension
+    my_ticker_extension.param1: param_value_xyz
+
 
 services:
-#    ticker.example:
-#        class: %ticker.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+
+    twig.extension.digmore.ticker:
+        class: Digmore\TickerBundle\Twig\Extension\TickerExtension
+        arguments:
+            - "@twig.loader"
+        tags:
+            - { name: twig.extension }
+        public: false
+
+    kernel.event_listener.digmore.ticker:
+        class: Digmore\TickerBundle\EventListener\ControllerListener
+        arguments: ["@my_ticker_extension"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    my_ticker_extension:
+        class: "%my_ticker_extension.class%"
+        arguments: ["@service_container"]

@@ -1,6 +1,6 @@
 <?php
 
-namespace Digmore\TickerBundle\Entity;
+namespace Digmore \TickerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;

@@ -1,8 +1,20 @@
-ticker_home:
-    pattern:  /tickers
-    defaults: { _controller: TickerBundle:Default:index }
+tickers:
+    pattern: /tickers
+    defaults: { _controller: TickerBundle:Ticker:list }
+    
+ticker_create:
+    path: /ticker/add
+    defaults: { _controller: TickerBundle:Ticker:add }
 
-ticker_view:
-    pattern:  /ticker/{pairName}
-    defaults: { _controller: TickerBundle:Default:view }
+ticker_read:
+    path: /ticker/{pairName}
+    defaults: { _controller: TickerBundle:Ticker:view }
+
+ticker_update:
+    path: /ticker/{id}/edit
+    defaults: { _controller: TickerBundle:Ticker:edit }
+
+ticker_delete:
+    path: /ticker/{id}/remove
+    defaults: { _controller: TickerBundle:Ticker:remove }
     

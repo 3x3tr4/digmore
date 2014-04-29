@@ -13,19 +13,29 @@ class PoolController extends Controller
 {
     /**
      */
-    public function indexAction()
+    public function listAction()
     {
         return $this->render('PoolBundle:Pool:index.html.twig');
     }
 
-    /**
-     */
-    public function viewAction($id = 0)
+    public function addAction()
+    {
+    }
+
+    public function viewAction($id = false)
     {
         return $this->render(
             'PoolBundle:Pool:view.html.twig',
             array('name' => $id)
         );
+    }
+
+    public function editAction($id = false)
+    {
+    }
+
+    public function removeAction($id = false)
+    {
     }
 
     /**

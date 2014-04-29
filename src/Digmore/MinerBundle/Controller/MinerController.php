@@ -1,5 +1,4 @@
 <?php
-
 namespace Digmore\MinerBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +19,7 @@ class MinerController extends Controller
      * Lists all Miner entities.
      *
      */
-    public function indexAction()
+    public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -46,10 +45,10 @@ class MinerController extends Controller
      * Creates a new Miner entity.
      *
      */
-    public function createAction(Request $request)
+    public function addAction(Request $request)
     {
         $entity = new Miner();
-        $form = $this->createCreateForm($entity);
+        $form = $this->createAddForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -57,7 +56,12 @@ class MinerController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('miner_show', array('id' => $entity->getId())));
+            return $this->redirect(
+                $this->generateUrl(
+                    'miner_read',
+                    array('id' => $entity->getId())
+                )
+            );
         }
 
         return $this->render(
@@ -76,14 +80,22 @@ class MinerController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Miner $entity)
+    private function createAddForm(Miner $entity)
     {
-        $form = $this->createForm(new MinerType(), $entity, array(
-            'action' => $this->generateUrl('miner_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            new MinerType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('miner_create'),
+                'method' => 'POST',
+            )
+        );
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add(
+            'submit',
+            'submit',
+            array('label' => 'Create')
+        );
 
         return $form;
     }
@@ -92,7 +104,7 @@ class MinerController extends Controller
      * Finds and displays a Miner entity.
      *
      */
-    public function showAction($id)
+    public function viewAction($id = false)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -102,12 +114,12 @@ class MinerController extends Controller
             throw $this->createNotFoundException('Unable to find Miner entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createRemoveForm($id);
 
         return $this->render(
             'MinerBundle:Miner:show.html.twig',
             array(
-                'entity'      => $entity,
+                'entity' => $entity,
                 'delete_form' => $deleteForm->createView()
             )
         );
@@ -122,12 +134,23 @@ class MinerController extends Controller
     */
     private function createEditForm(Miner $entity)
     {
-        $form = $this->createForm(new MinerType(), $entity, array(
-            'action' => $this->generateUrl('miner_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(
+            new MinerType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl(
+                    'miner_update',
+                    array('id' => $entity->getId())
+                ),
+                'method' => 'PUT',
+            )
+        );
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add(
+            'submit',
+            'submit',
+            array('label' => 'Update')
+        );
 
         return $form;
     }
@@ -136,7 +159,7 @@ class MinerController extends Controller
      * Edits an existing Miner entity.
      *
      */
-    public function updateAction(Request $request, $id)
+    public function editAction(Request $request, $id = false)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -146,7 +169,7 @@ class MinerController extends Controller
             throw $this->createNotFoundException('Unable to find Miner entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createRemoveForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
@@ -167,12 +190,37 @@ class MinerController extends Controller
     }
 
     /**
+     * Creates a form to delete a Miner entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createRemoveForm($id)
+    {
+    	return $this->createFormBuilder()
+    	->setAction(
+    			$this->generateUrl(
+    					'miner_delete',
+    					array('id' => $id)
+    			)
+    	)
+    	->setMethod('DELETE')
+    	->add(
+    			'submit',
+    			'submit',
+    			array('label' => 'Delete')
+    	)
+    	->getForm();
+    }
+
+    /**
      * Deletes a Miner entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function removeAction(Request $request, $id = false)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createRemoveForm($id);
         $form->handleRequest($request);
 
         if ($form->isValid())
@@ -192,30 +240,5 @@ class MinerController extends Controller
         }
 
         return $this->redirect($this->generateUrl('miner'));
-    }
-
-    /**
-     * Creates a form to delete a Miner entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction(
-                    $this->generateUrl(
-                        'miner_delete',
-                        array('id' => $id)
-                )
-            )
-            ->setMethod('DELETE')
-            ->add(
-                'submit',
-                'submit',
-                array('label' => 'Delete')
-            )
-            ->getForm();
     }
 }

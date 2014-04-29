@@ -1,10 +1,10 @@
 parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
-    database_port:     ~
+    database_port:     null
     database_name:     dig_db
     database_user:     root
-    database_password: ~
+    database_password: 3x3tr@DB
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1

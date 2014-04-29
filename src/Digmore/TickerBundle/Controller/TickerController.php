@@ -6,11 +6,9 @@ use Digmore\TickerBundle\Entity\Ticker;
 use Digmore\TickerBundle\Entity\CurrencyPair;
 use Digmore\TickerBundle\Entity\CurrencyPairRepository;
 
-class DefaultController extends Controller
+class TickerController extends Controller
 {
-    private $ticker_url = '';
-
-    public function indexAction()
+    public function listAction()
     {
         return $this->render(
             'TickerBundle:Default:index.html.twig',
@@ -18,7 +16,11 @@ class DefaultController extends Controller
         );
     }
 
-    public function viewAction($pairName = null)
+    public function addAction()
+    {
+    }
+
+    public function viewAction($pairName = false)
     {
         if ($pairName === null) {
             return null; // empty_response?
@@ -43,10 +45,11 @@ class DefaultController extends Controller
         );
     }
 
-    public function doSomething($param = null)
+    public function editAction($id = false)
     {
-        if ($value === null) {
-            return null;
-        }
+    }
+
+    public function removeAction($id = false)
+    {
     }
 }

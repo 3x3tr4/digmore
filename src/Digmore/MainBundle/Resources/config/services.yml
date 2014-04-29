@@ -1,0 +1,25 @@
+parameters:
+
+    my_main_extension.class: Digmore\MainBundle\DependencyInjection\MainExtension
+    my_main_extension.param1: param_value_xyz
+
+
+services:
+
+    twig.extension.digmore.main:
+        class: Digmore\MainBundle\Twig\Extension\MainExtension
+        arguments:
+            - "@twig.loader"
+        tags:
+            - { name: twig.extension }
+        public: false
+
+    kernel.event_listener.digmore.main:
+        class: Digmore\MainBundle\EventListener\ControllerListener
+        arguments: ["@my_main_extension"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    my_main_extension:
+        class: "%my_main_extension.class%"
+        arguments: ["@service_container"]
