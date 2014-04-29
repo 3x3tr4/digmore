@@ -3,7 +3,7 @@
 {% block miner_content -%}
     <h1>Miner list</h1>
 
-    <table class="records_list">
+    <table class="records_list" cellspacing="5" cellpadding="5">
         <thead>
             <tr>
                 <th>Id</th>
@@ -22,7 +22,7 @@
         <tbody>
         {% for miner in miners %}
             <tr>
-                <td><a href="{{ path('miner_show', { 'id': miner.id }) }}">{{ miner.id }}</a></td>
+                <td><a href="{{ path('miner_read', { 'id': miner.id }) }}">{{ miner.id }}</a></td>
                 <td>{{ miner.name }}</td>
                 <td>{{ miner.ip }}</td>
                 <td>{{ miner.port }}</td>
@@ -36,7 +36,7 @@
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('miner_show', { 'id': miner.id }) }}">show</a>
+                        <a href="{{ path('miner_read', { 'id': miner.id }) }}">show</a>
                     </li>
                     <li>
                         <a href="{{ path('miner_update', { 'id': miner.id }) }}">edit</a>
