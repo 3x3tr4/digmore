@@ -1,9 +1,28 @@
 
 <div class="miner-block">
     <div class="top-strip">
-        <div class="control-btn">
+        <div class="miner-name">{{ miner.name }}</div>
+        <div class="control-btn" onclick="show_miner_controls({{ miner.id }})">
+        </div>
+        <div class="clear"></div>
+        <div id="miner-controls-{{ miner.id }}" class="miner-controls">
+            <ul>
+              <li>MINER CONTROLS</li>
+              <li>
+                <ul>
+                    <li>RESTART X SERVER</li>
+                    <li>RESTART MACHINE</li>
+                    <li>RESTART CGMINER</li>
+                    <li>SHUTDOWN MACHINE</li>
+                </ul>
+              </li>
+              <li>POWER TUNE MINER</li>
+              <li>EXPERT POWER TUNE</li>
+              <li>CONFIGURE MINER</li>
+            </ul>
         </div>
     </div>
+    
     <!--h1>{{ "Miner " ~ miner.name }}</h1>
     <table class="item-list">
         <tr>

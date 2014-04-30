@@ -7,6 +7,60 @@ div.miner-block {
 }
 
 div.miner-block > div.top-strip {
+	
 	height: 38px;
-	background: red;
+	background: #f29400;
+}
+
+div.miner-block > div.top-strip div.control-btn {
+	float: right;
+	background: url('/bundles/miner/images/controls-btn.png');
+	width: 40px;
+	height: 38px;
+	cursor: pointer;
+}
+
+div.miner-block > div.top-strip div.miner-name {
+	float: left;
+}
+	
+div.miner-block div.miner-controls {
+	float: right;
+	
+	background: #aa0000;
+	color: black;
+	display: none;
+}
+
+div.miner-controls ul {
+	float: left;
+	width: 256px;
+	background: #f29400;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+div.miner-controls ul li {
+	cursor: pointer;
+}
+
+div.miner-controls ul li:hover {
+	background: gray;
+	color: white;
+}
+
+div.miner-controls ul li ul {
+	background: none;
+	margin: 0;
+	padding: 0 0 0 25px;
+}
+div.miner-controls ul li ul li {
+	color:black;
+}
+
+div.miner-controls ul li ul li:hover {
+    background: none;
+    color: black;
+    font-weight: bold;
 }

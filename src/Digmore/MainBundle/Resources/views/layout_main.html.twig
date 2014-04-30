@@ -9,6 +9,14 @@
         <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}" />
         
+        {#% javascripts
+            '@MainBundle/Resources/public/js/jquery-2.1.0.js'
+            '@MinerBundle/Resources/public/js/miner.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %#}
+        
+        <script src="{{ asset('bundles/main/js/jquery-2.1.0.js') }}"></script>
         {% block head %}{% endblock -%}
     </head>
     <body>
@@ -17,5 +25,13 @@
         <div id="content">
             {% block content %}{% endblock %}
         </div>
+        
+        
+        <script>
+            $(document).ready(function () {
+                {% block documentReady %}{% endblock documentReady %}
+            });
+        </script>
+        
     </body>
 </html>
