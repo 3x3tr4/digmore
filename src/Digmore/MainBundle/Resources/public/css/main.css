@@ -1,9 +1,53 @@
 body {
     font-size: 14px;
     font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
-    background: black;
-    color: white;
+    background: none;
+    color: black;
+    margin: 0px;
+    padding: 0px;
 }
+
+.header {
+    padding: 0px !important;
+    margin: 0px !important;
+    background: url('/bundles/main/images/header.png');
+    height: 40px;
+}
+
+.navbar-fixed-top {
+    top: 0px;
+}
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+    position: fixed;
+    right: 0px;
+    left: 0px;
+    z-index: 1001;
+    margin-bottom: 0px;
+}
+
+ul#menu {
+    margin-bottom: 20px;
+    padding-left: 0;
+}
+#menu li {
+	float: left;
+    padding-left: 0;
+    margin-right: 10px;
+    display: inline;
+}
+a,
+li a {
+    color: #08C;
+    text-decoration: none;
+}
+a:hover,
+li a:hover {
+    color: #08C;
+    text-decoration: underline;
+}
+
+/* orig */
 h1.title {
     font-size: 45px;
     padding-bottom: 30px;
@@ -59,44 +103,29 @@ ul#demo-list a {
     padding:    18px;
     border:     1px solid #E6E6E6;
 }
+
 .sf-reset .symfony-blocks-help > div {
     width:        254px;
     float:        left;
 }
+
 .flash-message {
     padding: 10px;
     margin: 5px;
     margin-top: 15px;
     background-color: #ffe;
 }
+
 .sf-reset .error {
     color: red;
 }
+
 #login label, #contact_form label {
     display: block;
     float: left;
     width: 90px;
 }
-.sf-reset ul#menu {
-    float: right;
-    margin-bottom: 20px;
-    padding-left: 0;
-}
-.sf-reset #menu li {
-    padding-left: 0;
-    margin-right: 10px;
-    display: inline;
-}
-.sf-reset a,
-.sf-reset li a {
-    color: #08C;
-    text-decoration: none;
-}
-.sf-reset a:hover,
-.sf-reset li a:hover {
-    color: #08C;
-    text-decoration: underline;
-}
+
 .sf-reset .symfony-content pre {
     white-space: pre;
     font-family: monospace;
@@ -104,4 +133,8 @@ ul#demo-list a {
 
 table.item-list {
 	border: 1px black solid;
+}
+
+div.clear {
+	clear: both;
 }

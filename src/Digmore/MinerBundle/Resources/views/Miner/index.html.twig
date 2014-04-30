@@ -1,7 +1,8 @@
 {% extends 'MinerBundle::miner-layout.html.twig' %}
 
-{% block miner_content -%}
-    <h1>Miner list</h1>
+{% block miner_content %}
+    {% if miners is defined %}
+        <h1>{{ miners|length }} miners</h1>
 
     <table class="records_list" cellspacing="5" cellpadding="5">
         <thead>
@@ -55,4 +56,12 @@
             </a>
         </li>
     </ul>
+    
+    
+        {% if miners|length %}
+            {% for miner in miners %}
+                {{ include('MinerBundle:Miner:miner-block.html.twig', { 'miner': miner }) }}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
 {% endblock %}

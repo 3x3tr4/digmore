@@ -1,6 +1,10 @@
 {% extends "MainBundle::layout.html.twig" %}
 
-{% block title %}Miner section{% endblock %}
+{% block title_section %} | Miner{% endblock %}
+
+{% block head -%}
+    <link rel="stylesheet" href="{{ asset('bundles/miner/css/miner.css') }}" />
+{% endblock %}
 
 {% block content %}
     {% block miner_content %}{% endblock %}

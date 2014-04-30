@@ -3,18 +3,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
         <meta name="robots" content="noindex,nofollow" />
-        <title>{% block title %}{% endblock %}</title>
+        <title>{% block title %}Digmore{% block title_section %}{% endblock %}{% endblock %}</title>
         <link href="{{ asset('bundles/framework/css/structure.css') }}" rel="stylesheet" type="text/css" media="all" />
         <link href="{{ asset('bundles/framework/css/body.css') }}" rel="stylesheet" type="text/css" media="all" />
-        {% block head %}{% endblock %}
+        <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/main/css/main.css') }}" />
+        
+        {% block head %}{% endblock -%}
     </head>
     <body>
         {% block content_header %}{% endblock %}
 
         <div id="content">
-            <div class="sf-reset">
-                {% block content %}{% endblock %}
-            </div>
+            {% block content %}{% endblock %}
         </div>
     </body>
 </html>

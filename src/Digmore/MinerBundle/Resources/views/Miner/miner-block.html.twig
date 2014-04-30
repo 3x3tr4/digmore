@@ -1,6 +1,10 @@
 
 <div class="miner-block">
-    <h1>{{ "Miner " ~ miner.name }}</h1>
+    <div class="top-strip">
+        <div class="control-btn">
+        </div>
+    </div>
+    <!--h1>{{ "Miner " ~ miner.name }}</h1>
     <table class="item-list">
         <tr>
             <td>{{ miner.name }}</td>
@@ -15,7 +19,7 @@
             <td>
             <ul>
                 <li>
-                    <a href="{{ path('miner_show', { 'id': miner.id }) }}">show</a>
+                    <a href="{{ path('miner_read', { 'id': miner.id }) }}">show</a>
                 </li>
                 <li>
                     <a href="{{ path('miner_update', { 'id': miner.id }) }}">edit</a>
@@ -23,5 +27,6 @@
             </ul>
             </td>
         </tr>
-    </table>
+    </table-->
+    
 </div>
