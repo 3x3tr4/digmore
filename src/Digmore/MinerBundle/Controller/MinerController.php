@@ -19,13 +19,11 @@ class MinerController extends Controller
      * Lists all Miner entities.
      *
      */
-    public function listAction()
+    public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $miners = $em
-            ->getRepository('MinerBundle:Miner')
-            ->findAll();
+        $miners = $em->getRepository('MinerBundle:Miner')->findAll();
 
         /*return $this->render(
             'MinerBundle:Miner:miner-set.html.twig',
@@ -35,14 +33,12 @@ class MinerController extends Controller
         );*/
         return $this->render(
             'MinerBundle:Miner:index.html.twig',
-            array(
-                'miners' => $miners
-            )
+            array('miners' => $miners)
         );
     }
 
     /**
-     * Creates a new Miner entity.
+     * Create miner
      *
      */
     public function addAction(Request $request)
@@ -80,28 +76,27 @@ class MinerController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createAddForm(Miner $entity)
+    private function getCreateForm(Miner $entity)
     {
-        $form = $this->createForm(
+        return $this
+        ->createForm(
             new MinerType(),
             $entity,
             array(
                 'action' => $this->generateUrl('miner_create'),
                 'method' => 'POST',
             )
-        );
-
-        $form->add(
+        )
+        ->add(
             'submit',
             'submit',
             array('label' => 'Create')
         );
-
-        return $form;
     }
 
+
     /**
-     * Finds and displays a Miner entity.
+     * Read miner
      *
      */
     public function viewAction($id = false)
@@ -110,11 +105,11 @@ class MinerController extends Controller
 
         $entity = $em->getRepository('MinerBundle:Miner')->find($id);
 
-        if (!$entity) {
+        if (! $entity) {
             throw $this->createNotFoundException('Unable to find Miner entity.');
         }
 
-        $deleteForm = $this->createRemoveForm($id);
+        $deleteForm = $this->getDeleteForm($id);
 
         return $this->render(
             'MinerBundle:Miner:show.html.twig',
@@ -126,15 +121,16 @@ class MinerController extends Controller
     }
 
     /**
-    * Creates a form to edit a Miner entity.
+    * Get miner-update form
     *
-    * @param Miner $entity The entity
+    * @param Miner $entity miner
     *
-    * @return \Symfony\Component\Form\Form The form
+    * @return \Symfony\Component\Form\Form miner-update form
     */
-    private function createEditForm(Miner $entity)
+    private function getUpdateForm(Miner $entity)
     {
-        $form = $this->createForm(
+        return $this
+        ->createForm(
             new MinerType(),
             $entity,
             array(
@@ -144,19 +140,16 @@ class MinerController extends Controller
                 ),
                 'method' => 'PUT',
             )
-        );
-
-        $form->add(
+        )
+        ->add(
             'submit',
             'submit',
             array('label' => 'Update')
         );
-
-        return $form;
     }
 
     /**
-     * Edits an existing Miner entity.
+     * Update miner
      *
      */
     public function editAction(Request $request, $id = false)
@@ -165,72 +158,82 @@ class MinerController extends Controller
 
         $entity = $em->getRepository('MinerBundle:Miner')->find($id);
 
-        if (!$entity) {
+        if (! $entity) {
             throw $this->createNotFoundException('Unable to find Miner entity.');
         }
 
-        $deleteForm = $this->createRemoveForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
+        $deleteForm = $this->getDeleteForm($id);
 
-        if ($editForm->isValid()) {
+        $updateForm = $this->getUpdateForm($entity);
+
+        $updateForm->handleRequest($request);
+
+        if ($updateForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('miner_update', array('id' => $id)));
+            return $this->redirect(
+                $this->generateUrl(
+                    'miner_update',
+                    array('id' => $id)
+                )
+            );
         }
 
         return $this->render(
-            'MinerBundle:Miner:edit.html.twig',
+            'MinerBundle:Miner:update.html.twig',
             array(
-                'entity'      => $entity,
-                'edit_form'   => $editForm->createView(),
+                'entity' => $entity,
+                'update_form' => $updateForm->createView(),
                 'delete_form' => $deleteForm->createView()
             )
         );
     }
 
     /**
-     * Creates a form to delete a Miner entity by id.
+     * Get miner-delete form
      *
-     * @param mixed $id The entity id
+     * @param mixed $id miner ID
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\Form miner-delete form
      */
-    private function createRemoveForm($id)
+    private function getDeleteForm($id)
     {
-    	return $this->createFormBuilder()
+    	return $this
+    	->createFormBuilder()
     	->setAction(
-    			$this->generateUrl(
-    					'miner_delete',
-    					array('id' => $id)
-    			)
-    	)
-    	->setMethod('DELETE')
-    	->add(
-    			'submit',
-    			'submit',
-    			array('label' => 'Delete')
-    	)
-    	->getForm();
+			$this->generateUrl(
+				'miner_delete',
+				array('id' => $id)
+			)
+	    )
+	    ->setMethod(
+	        'DELETE'
+	    )
+	    ->add(
+	        'submit',
+	        'submit',
+	        array('label' => 'Delete')
+	    )
+	    ->getForm();
     }
 
+
     /**
-     * Deletes a Miner entity.
+     * Delete miner
      *
      */
     public function removeAction(Request $request, $id = false)
     {
-        $form = $this->createRemoveForm($id);
+        $form = $this->getDeleteForm($id);
         $form->handleRequest($request);
 
         if ($form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em
-                ->getRepository('MinerBundle:Miner')
-                ->find($id);
 
-            if (!$entity)
+            $entity = $em->getRepository('MinerBundle:Miner')->find($id);
+
+            if (! $entity)
             {
                 throw $this->createNotFoundException('Unable to find Miner entity.');
             }
@@ -239,6 +242,8 @@ class MinerController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('miner'));
+        return $this->redirect(
+            $this->generateUrl('miner')
+    	);
     }
 }
