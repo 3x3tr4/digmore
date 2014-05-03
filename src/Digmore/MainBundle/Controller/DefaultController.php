@@ -1,6 +1,7 @@
 <?php
-
 namespace Digmore\MainBundle\Controller;
+
+// xxx
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Digmore\MinerBundle\Entity\Miner;
